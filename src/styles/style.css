@@ -1,0 +1,8 @@
+@import "remove.min.css";
+@import "variables.css";
+@import "sass/block.scss";
+
+@import "sass/components/Paggination.scss";
+@import "sass/components/Header.scss";
+@import "sass/components/Section_Table.scss";
+@import "sass/components/Table.scss";

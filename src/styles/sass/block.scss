@@ -1,0 +1,10 @@
+@import "mixins.scss";
+
+body{
+    background: var(--color-background);
+    font-family: 'Montserrat', sans-serif;
+}
+
+.container{
+    @extend %container;
+}
