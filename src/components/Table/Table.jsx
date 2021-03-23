@@ -11,13 +11,17 @@ let types = {
 
 let Table = ({data}) => {
 
-    let [filter, setFilter] = useState(false)
+    let [filter, setFilter] = useState('default')
 
     let renderRows = (data) => {
         if(data?.length){
 
-            if(filter){
-                data = qSort(data).reverse()
+            switch(filter){
+                case "ASC": 
+                    data = qSort(data); break;
+                case "DESC":
+                    data = qSort(data).reverse(); break;
+                default: data;      
             }
 
             return data?.map((element) => {
@@ -37,7 +41,13 @@ let Table = ({data}) => {
     }  
     
     let useFilter = () => {
-        setFilter(!filter)
+        switch(filter){
+            case "default": setFilter("ASC"); break;
+            case "ASC": setFilter("DESC");break;
+            case "DESC": setFilter("default");break;
+            default: setFilter('default')
+        }
+        console.log(filter);
     }
         
 
