@@ -7,10 +7,9 @@ import Button from './Button';
 let types = {
     count: PropTypes.number.isRequired,
     currentPage: PropTypes.number.isRequired,
-    changePage: PropTypes.func.isRequired
 }
 
-let PageButtons = ({count, currentPage, changePage}) => {
+let PageButtons = ({count, currentPage }) => {
 
     const   MAX_ORDER_BUTTONS           = 15,
             PAGE_AFTER_PORTALS_ENABLE   = 11,
@@ -30,18 +29,18 @@ let PageButtons = ({count, currentPage, changePage}) => {
                     break
                 }          
                     RESULT.push(
-                        <Button key={i + 1} position={i} changePage={changePage} />
+                        <Button key={i + 1} position={i}/>
                     ) 
             }
 
                 // Added the first page
                 RESULT.unshift(
-                    <Button key={0} position={0} landmark changePage={changePage} />
+                    <Button key={0} position={0} landmark/>
                 )
 
                 // Added the last page
                 RESULT.push(
-                    <Button key={(count)} landmark position={count - 1} changePage={changePage} />
+                    <Button key={(count)} landmark position={count - 1}/>
                 )  
         }
 
@@ -49,11 +48,11 @@ let PageButtons = ({count, currentPage, changePage}) => {
         else if(count >= MAX_ORDER_BUTTONS){
             for (let i = 0 ; i < MAX_ORDER_BUTTONS; i++) {            
                 RESULT.push(
-                    <Button key={i} position={i} changePage={changePage} />
+                    <Button key={i} position={i}/>
                 )
             }  
             RESULT.push(
-                <Button key={count} landmark position={count - 1} changePage={changePage} />
+                <Button key={count} landmark position={count - 1}/>
             )  
         }
 
@@ -61,14 +60,21 @@ let PageButtons = ({count, currentPage, changePage}) => {
         else{
             for (let i = 0 ; i < count; i++) {            
                 RESULT.push(
-                    <Button key={i} position={i} neutral={true} changePage={changePage} />
+                    <Button key={i} position={i} neutral={true}/>
                 )
             }
         }
+        
         return RESULT;
     }
 
-    return renderButtons(count)
+    return(
+        <div className="page-navigation">
+            <div className="container">
+                {renderButtons(count)}
+            </div>
+        </div>   
+    )
 }
 
 PageButtons.propTypes = types;

@@ -1,9 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import PagginationContext from 'src/controller/PagginationContext';
-import Data from 'src/data/data.json'; // Static Data
+import DataContext from 'src/controller/DataContext';
+import CurrentDataContext from 'src/controller/CurrentDataContext';
 
+import Table from 'components/Table/Table';
 import PageButtons from 'components/PageButtons/PageButtons';
 
 let types = {
@@ -11,39 +13,29 @@ let types = {
 }
 
 
-let Paggination = ({steps = 50}) => {
+let Paggination = ({steps = 25}) => {
 
-    let [startData, setStartData] = useState(Data);
+    let [currentPage, setCurrentPage] = useState(0);
 
-    console.log(startData);
+    let pagginationContext = {
+        currentPage,
+        setCurrentPage
+    }
 
-    let {page, data} = useContext(PagginationContext),
-        {currentPage, setCurrentPage} = page,
-        {setCurrentData} = data;
+    let { appData } = useContext(DataContext),
+        { currentData} = useContext(CurrentDataContext)
 
-    let amountData      = startData?.length,
+    let Data = currentData ?? appData;
+
+    let amountData      = Data.length,
         amountPages     = Math.ceil(amountData / steps),
-        actualData      = startData?.slice(currentPage * steps, currentPage * steps + steps);
-    
-
-    // Get data from Server
-
-    /* useEffect(async () => {
-        let users = await (await fetch("https://jsonplaceholder.typicode.com/users")).json()
-                    await setStartData(users)
-    }, []) */
-
-    useEffect(() => {
-        setCurrentData(actualData)
-    }, [startData, currentPage])
-
+        actualData      = Data.slice(currentPage * steps, currentPage * steps + steps);
 
     return(
-        <div className="page-navigation">
-            <div className="container">
-                {<PageButtons count={amountPages} currentPage={currentPage} changePage={setCurrentPage}/> }
-            </div>
-        </div>        
+        <PagginationContext.Provider value={pagginationContext}>
+            <Table data={actualData}/>
+            <PageButtons count={amountPages} currentPage={currentPage}/>
+        </PagginationContext.Provider>     
     )
 }
 

@@ -26,6 +26,7 @@ $table-mobile-font-size: 14px;
         width: 25%;
         padding: 20px 12px;
         border: none;
+        cursor: pointer;
     }
     &__column:first-child{
         border-radius: $table-th-border-radius 0px 0px $table-th-border-radius;

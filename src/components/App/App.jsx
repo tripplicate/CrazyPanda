@@ -1,33 +1,36 @@
 import React, { useState } from 'react';
-import PagginationContext from 'src/controller/PagginationContext';
+import DataContext from 'src/controller/DataContext';
+import CurrentDataContext from 'src/controller/CurrentDataContext';
+
+import Data from 'src/data/data.json';
 
 import Header from 'components/Header/Header';
-import Table from 'components/Table/Table';
 import Paggination from 'components/Paggination/Paggination';
 
 let App = () => {
-
-   let   [currentPage, setCurrentPage] = useState(0),
-         [currentData, setCurrentData] = useState([]);
-
-
-   let   pagginationContext = {
-            page: {
-               currentPage,
-               setCurrentPage
-            },
-            data: {
-               currentData,
-               setCurrentData
-            }
-         } 
    
+   let   [appData, setAppData] = useState(Data),
+         [currentData, setCurrentData] = useState();
+
+   let appDataContext = {
+      appData,
+      setAppData
+   }
+
+   let appCurrentDataContext = {
+      currentData,
+      setCurrentData
+   }
+
    return(
-      <PagginationContext.Provider value={pagginationContext}>
+      <>
          <Header/>
-         <Table />
-         <Paggination/> 
-      </PagginationContext.Provider>
+         <DataContext.Provider value={appDataContext}>
+            <CurrentDataContext.Provider value={appCurrentDataContext}>
+               <Paggination steps={50}/>
+            </CurrentDataContext.Provider>
+         </DataContext.Provider> 
+      </>  
    )
 }
 

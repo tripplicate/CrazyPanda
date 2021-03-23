@@ -5,16 +5,14 @@ import PagginationContext from 'src/controller/PagginationContext';
 
 let types = {
     position: PropTypes.number.isRequired,
-    changePage: PropTypes.func.isRequired,
     landmark: PropTypes.bool
 }
 
 
-let Button = ({position, changePage, landmark}) => {
+let Button = ({position, landmark}) => {
     
     
-    let {page}  = useContext(PagginationContext),
-        {currentPage} = page;
+    let {currentPage, setCurrentPage} = useContext(PagginationContext)
     
     const CLASSES = {
         default: "page-navigation__button",
@@ -23,7 +21,7 @@ let Button = ({position, changePage, landmark}) => {
     };
 
     let hundleClick = (pos) => {
-        changePage(pos);
+        setCurrentPage(pos);
         window.scrollTo(pageYOffset, 0)
     };
 

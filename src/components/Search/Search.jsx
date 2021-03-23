@@ -1,29 +1,42 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
+
+import DataContext from 'src/controller/DataContext';
+import CurrentDataContext from 'src/controller/CurrentDataContext';
 import PagginationContext from 'src/controller/PagginationContext';
 
-import Data from 'src/data/data.json';
-
 let Search = () => {
+    let [value, setValue] = useState(''),
+        {appData} = useContext(DataContext),
+        {setCurrentData} = useContext(CurrentDataContext),
+        {setCurrentPage} = useContext(PagginationContext)
 
 
-    let [value, setValue] = useState("");
 
-    let {data} = useContext(PagginationContext),
-        {currentData, setCurrentData} = data;
+    let search = (data, searchValue) => {
+        let FILTERING = [];
 
-    function hundleChange(parent){
-        setValue(parent.target.value)
-    }
-
-    useEffect(() => {
-        let result = Data.filter(el => {
-            return  el.name.includes(value)
-          })
-      
-          setCurrentData(result)
-    }, [value])
-   
+        if(!searchValue.length){
+            setCurrentData(FILTERING)
+        }
+        
+        FILTERING = data.filter(el => {
+                return  el.name.toLowerCase().includes(searchValue)  ||
+                        el.email.toLowerCase().includes(searchValue) ||
+                        el.job.toLowerCase().includes(searchValue)
+            })
+            
+            setCurrentData(FILTERING)
+            setCurrentPage(0)
+    }    
     
+    let hundleChange = ({currentTarget}) => {
+
+        let {value} = currentTarget
+
+        setValue(value)
+        search(appData, value)
+
+    }
 
     return(
         <div className="section-table__search-container">

@@ -1,22 +1,30 @@
-import React, {useContext} from 'react';
-import PagginationContext from 'src/controller/PagginationContext';
+import React, { useState } from 'react';
+import PropTypes, { object } from 'prop-types';
+
+import qSort from 'src/tools/qSort';
 
 import Search from 'components/Search/Search';
 
-let Table = () => {
+let types = {
+    data: PropTypes.arrayOf(object)
+}
 
-    let {data} = useContext(PagginationContext),
-        {currentData} = data;
+let Table = ({data}) => {
 
+    let [filter, setFilter] = useState(false)
 
-    let renderRows = (currentData) => {
-        if(currentData?.length){
+    let renderRows = (data) => {
+        if(data?.length){
 
-            return currentData?.map((element ,i) => {
+            if(filter){
+                data = qSort(data).reverse()
+            }
+
+            return data?.map((element) => {
 
                 let {id, name, email, job} = element
                 
-                return <tr key={id} className="table__body-tr">
+                return <tr data-user-id={id} key={id} className="table__body-tr">
                             <td className="table__body-td">{name}</td>
                             <td className="table__body-td">{email}</td>
                             <td className="table__body-td">{job}</td>
@@ -26,7 +34,11 @@ let Table = () => {
         return  <tr className="table__body-tr">
                     <td className="table__body-td">Data is empty</td>
                 </tr>
-    }    
+    }  
+    
+    let useFilter = () => {
+        setFilter(!filter)
+    }
         
 
     return(
@@ -39,19 +51,20 @@ let Table = () => {
                 <div className="table-wrapper">
                     <table cellSpacing="0" className="table table_mt_20">
                         <thead className="table__header">
-                            <tr className="table__header-tr">
+                            <tr onClick={useFilter} className="table__header-tr">
                                 <th className="table__column">Ф.И.О</th>
                                 <th className="table__column">Почта</th>
                                 <th className="table__column">Должность</th>
                             </tr>
                         </thead>
-                        <tbody className="table__body">{renderRows(currentData)}</tbody>
+                        <tbody className="table__body">{renderRows(data)}</tbody>
                     </table>
-                </div>
-                
+                </div>  
             </div>
         </section>
     )
 }
+
+Table.propTypes = types;
 
 export default Table;
