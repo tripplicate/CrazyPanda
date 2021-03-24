@@ -14,6 +14,7 @@ I should:
 Development: **13 hours**
 
 #### ✏️ Links
+Figma project [here](https://www.figma.com/file/6xeuoUt6UFKsKzVce4uaU2/Crazy-Panda-Task?node-id=0%3A1) 
 
 See work [here](https://tripplicate.github.io/CrazyPanda/)
 
