@@ -11,9 +11,8 @@ let types = {
 
 let Table = ({data}) => {
 
-    let [filter, setFilter] = useState('default');
-
-    let title = useRef()
+    let [filter, setFilter] = useState('default',
+        title               = useRef();
 
     let renderRows = (data) => {
         if(data?.length){
