@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import PropTypes, { object } from 'prop-types';
 
 import qSort from 'src/tools/qSort';
@@ -11,7 +11,9 @@ let types = {
 
 let Table = ({data}) => {
 
-    let [filter, setFilter] = useState('default')
+    let [filter, setFilter] = useState('default');
+
+    let title = useRef()
 
     let renderRows = (data) => {
         if(data?.length){
@@ -42,20 +44,24 @@ let Table = ({data}) => {
     
     let useFilter = () => {
         switch(filter){
-            case "default": setFilter("ASC"); break;
-            case "ASC": setFilter("DESC");break;
-            case "DESC": setFilter("default");break;
+            case "default": 
+                setFilter("ASC")
+                title.current.setAttribute('data-title', "По возрастанию");break;
+            case "ASC":
+                 setFilter("DESC")
+                 title.current.setAttribute('data-title', "По убыванию");break;
+            case "DESC":
+                 setFilter("default")
+                 title.current.removeAttribute('data-title');break;
             default: setFilter('default')
         }
-        console.log(filter);
     }
-        
 
     return(
         <section className="section-table section-table_mt_60">
             <div className="container section-table__container">
                 <header className="section-table__header">
-                    <h1 className="section-table__title">Сотрудники</h1>
+                    <h1 ref={title} className="section-table__title">Сотрудники</h1>
                     <Search/>
                 </header>
                 <div className="table-wrapper">

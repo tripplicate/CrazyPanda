@@ -14,7 +14,17 @@
         justify-content: space-between;
     }
     &__title{
+        position: relative;
         font-size: 36px;
+        &:after{
+            content: attr(data-title);
+            position: absolute;
+            top: 63%;
+            right: -37%;
+            transform: translate(50% ,-50%);
+            font-size: 18px;
+            color: #45475063;
+        }
     }
     &__search-container{
         align-self: flex-end;
