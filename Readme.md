@@ -1,4 +1,4 @@
-## `task` Paggination & Search
+## `task` Pagination & Search
 
 ![CrazyPanda](./docs/git.png)
 
