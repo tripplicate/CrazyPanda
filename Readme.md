@@ -47,5 +47,5 @@ Danil Sergeev - [telegram](https://t.me/tripplicate) - @tripplicate
 
 <!-- MARKDOWN LINKS & IMAGES -->
 
-[repo-size-shield]: https://img.shields.io/github/repo-size/tripplicate/Pagination?color=%23c5003e&&style=for-the-badge
+[repo-size-shield]: https://img.shields.io/github/repo-size/tripplicate/Pagination?color=%23c5003e&style=for-the-badge
 [repo-activity]: https://img.shields.io/github/commit-activity/y/tripplicate/Pagination?color=%23c5003e&style=for-the-badge
