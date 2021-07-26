@@ -31,7 +31,7 @@
 
 ## Description
 
-This work is test task for Crazy Panda company whe I should:
+This work is test task for Crazy Panda company when I should:
 
 - Create a table where content would divide pagination
 - Create a search that applies to every input
