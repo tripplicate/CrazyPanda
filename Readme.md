@@ -15,8 +15,9 @@
 
 <!-- TABLE OF CONTENTS -->
 <details open="open">
-  <summary><h3>Content</h3></summary>
-  <ul>
+  <summary>Content</summary>
+  <br>
+  <ol>
     <li>
       <a href="#desciption">Description</a>
     </li>
